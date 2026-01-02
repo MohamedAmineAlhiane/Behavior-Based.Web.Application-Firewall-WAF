@@ -127,6 +127,24 @@ At a high level, incoming HTTP requests pass through the following stages:
 
 This architecture reflects how real-world WAF systems separate inspection, decision-making, and enforcement while remaining transparent to the protected application.
 
+## Implementation Overview
+
+The project includes a Python-based implementation of a behavior-based Web Application Firewall (WAF).  
+The detection logic is implemented using a scoring-based decision engine that evaluates incoming requests based on multiple behavioral signals.
+
+The implementation prioritizes clarity, modular design, and defensive reasoning rather than production deployment.
+
+## Testing
+
+The WAF detection logic is validated using automated unit tests implemented with Python's built-in `unittest` framework.  
+The test suite verifies expected behavior across normal usage, anomalous patterns, severe conditions, and false-positive scenarios.
+
+The successful execution of the test suite confirms the consistency and reliability of the decision-making logic.
+
+### Test Results
+
+![Test Results](screenshots/tests-success.png)
+
 ## Logging & Observability
 
 Visibility is a critical component of any defensive security system. Rather than focusing solely on blocking requests, this WAF emphasizes logging and observability as primary mechanisms for understanding traffic behavior over time.
