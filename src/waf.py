@@ -1,7 +1,12 @@
 import time
+from logging
 from collections import defaultdict
 from dataclasses import dataclass, field
 from typing import List, Dict
+
+from src.logger import setup_logger
+
+logger = setup_logger()
 
 # -----------------------------
 # Configuration
