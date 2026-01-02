@@ -1,4 +1,4 @@
-# Secure-Web-Application-Firewall-WAF-Prototype
+# Secure-Web-Application-Firewall-WAF
 This project implements a defensive and educational Web Application Firewall (WAF) designed to analyze incoming HTTP requests and identify abnormal behavior using scoring-based detection logic.
 
 ## Scope & Goals
@@ -159,6 +159,12 @@ Each evaluated request may generate structured log entries that include:
 Logged data is intended to support post-analysis rather than real-time enforcement alone. By reviewing logs, analysts can identify recurring patterns, adjust detection thresholds, and reduce false positives without disrupting legitimate traffic.
 
 This observability-first approach reflects real-world defensive practices, where monitoring and analysis often precede strict enforcement decisions.
+
+### Example Log Output
+
+The following screenshot demonstrates structured logging output generated during request evaluation, including decision levels, contextual metadata, and behavioral reasoning.
+
+![Logging Output](screenshots/logging-output.png)
 
 ## Limitations
 
