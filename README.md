@@ -1,5 +1,9 @@
 # Behavior Based Web Application Firewall (WAF)
-This project implements a defensive and educational Web Application Firewall (WAF) designed to analyze incoming HTTP requests and identify abnormal behavior using scoring-based detection logic.
+## Overview
+
+This repository presents a behavior-based Web Application Firewall (WAF) implemented in Python and integrated as a FastAPI middleware.
+
+The system inspects incoming HTTP requests in real time and applies scoring-based behavioral analysis to decide whether a request should be allowed, logged, or blocked.
 
 ## Scope & Goals
 
@@ -20,6 +24,21 @@ The project does not attempt to provide full web security coverage or replace en
 The primary goals of this project are:
 - To understand how WAF systems reason about request legitimacy
 - To explore how normal request behavior can be distinguished from abnormal patterns
+
+## Quick Start
+
+### Requirements
+- Python 3.10+
+- Virtual environment (venv)
+
+### Setup
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+uvicorn src.app:app --reload
+The service will be available at: http://127.0.0.1:8000
 
 ## Threat Model (Simplified)
 
