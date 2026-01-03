@@ -5,6 +5,17 @@ This repository presents a behavior-based Web Application Firewall (WAF) impleme
 
 The system inspects incoming HTTP requests in real time and applies scoring-based behavioral analysis to decide whether a request should be allowed, logged, or blocked.
 
+
+## Key Features
+
+- Behavior-based request analysis using scoring logic
+- Real-time inspection through FastAPI middleware
+- Request rate and payload anomaly detection
+- Sensitive endpoint monitoring
+- Structured logging for observability and analysis
+- Configurable thresholds via external configuration
+- Fully tested core detection engine
+
 ## Scope & Goals
 
 ### Scope
