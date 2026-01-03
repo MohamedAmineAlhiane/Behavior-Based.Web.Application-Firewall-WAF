@@ -8,13 +8,14 @@ from src.logger import setup_logger
 
 logger = setup_logger()
 
+
 # -----------------------------
 # Configuration
 # -----------------------------
 
 @dataclass
 class WAFConfig:
-    max_requests: int = 5
+    max_requests: int
     time_window: int = 10  # seconds
     max_payload_size: int = 500
     sensitive_endpoints: List[str] = field(default_factory=lambda: ["/admin"])
@@ -70,7 +71,7 @@ class WAFEngine:
             reasons.append("Sensitive endpoint access")
 
         decision = self._decide(score)
-        
+
         logger.log(
             logging.INFO if decision == "ALLOW"
             else logging.WARNING if decision == "LOG"
@@ -84,7 +85,7 @@ class WAFEngine:
                 "reasons": reasons,
             }
         )
-        
+
         return decision, reasons, score
 
     @staticmethod
@@ -94,20 +95,3 @@ class WAFEngine:
         elif score >= 2:
             return "LOG"
         return "ALLOW"
-
-
-# -----------------------------
-# Simulation
-# -----------------------------
-
-    test_requests = [
-        Request("1.1.1.1", "/login", "user=test"),
-        Request("1.1.1.1", "/login", "user=test"),
-        Request("1.1.1.1", "/login", "user=test"),
-        Request("1.1.1.1", "/admin", "X" * 600),
-        Request("2.2.2.2", "/home"),
-    ]
-
-    for req in test_requests:
-        decision, reasons, score = waf.analyze(req)
-        time.sleep(1)
