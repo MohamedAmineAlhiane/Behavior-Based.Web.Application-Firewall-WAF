@@ -6,23 +6,42 @@ from src.config import ConfigLoader
 from src.logger import setup_logger
 
 
+# -----------------------------
 # Setup core components
+# -----------------------------
+
 logger = setup_logger()
 loader = ConfigLoader()
 
-waf_config = WAFConfig(loader.get_waf_config())
+# Load WAF configuration from config.json
+waf_settings = loader.get_waf_config()
+
+waf_config = WAFConfig(
+    max_requests=waf_settings.get("max_requests", 5),
+    time_window=waf_settings.get("time_window", 10),
+    max_payload_size=waf_settings.get("max_payload_size", 500),
+    sensitive_endpoints=waf_settings.get("sensitive_endpoints", ["/admin"]),
+)
+
 waf = WAFEngine(waf_config)
 
 app = FastAPI(title="Behavior-Based Web Application Firewall")
 
+
+# -----------------------------
+# WAF Middleware
+# -----------------------------
 
 @app.middleware("http")
 async def waf_middleware(request: Request, call_next):
     source_ip = request.client.host if request.client else "unknown"
     endpoint = request.url.path
 
-    body_bytes = await request.body()
-    payload = body_bytes.decode(errors="ignore")
+    try:
+        body_bytes = await request.body()
+        payload = body_bytes.decode(errors="ignore")
+    except Exception:
+        payload = ""
 
     waf_request = WAFRequest(
         source=source_ip,
@@ -44,6 +63,10 @@ async def waf_middleware(request: Request, call_next):
     response = await call_next(request)
     return response
 
+
+# -----------------------------
+# Example Endpoints
+# -----------------------------
 
 @app.get("/home")
 def home():
