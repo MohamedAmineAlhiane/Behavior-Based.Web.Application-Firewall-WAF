@@ -162,7 +162,7 @@ At a high level, incoming HTTP requests pass through the following stages:
    - Block
 
 4. **Action Handling**  
-   - Allowed requests are forwarded to the application  
+   - Allowed requests are forwarded to the application
    - Logged requests are recorded for later review  
    - Blocked requests are stopped and do not reach application logic
 
@@ -227,6 +227,9 @@ This project initially began as a conceptual prototype and evolved into a tested
 ## License
 This project is licensed under the MIT License – see the LICENSE file for details.
 You are free to use, modify, and distribute this project, but it comes as-is without any warranty.
+
+## Version
+**V1.0**
 
 ## Ethical Notice
 
